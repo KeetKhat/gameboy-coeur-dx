@@ -5,10 +5,10 @@
  EN : The perfect gift to offer to your loved one !
 
 ## Comment le compiler ? / How to compile it ?
-FR : Remplissez la chaîne de caractère dans le fichier src/graphics/text/text.asm  
+FR : Remplissez la chaîne de caractère en majuscules dans le fichier src/graphics/text/text.asm  
 Puis tapez ```make``` dans un terminal (Vous devez avoir installé [RGBDS](https://github.com/gbdev/rgbds) en premier)
 
-EN : Fill the string in the file src/graphics/text/text.asm  
+EN : Fill the string in capital letters in the file src/graphics/text/text.asm  
 Then type ```make``` in a terminal (You must have installed [RGBDS](https://github.com/gbdev/rgbds) first)
 
 ## Captures d'écran / Screenshots
