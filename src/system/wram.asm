@@ -1,0 +1,1 @@
+SECTION "WRAM Variables", WRAM0 ; First slot
