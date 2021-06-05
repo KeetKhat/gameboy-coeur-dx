@@ -4,7 +4,7 @@
  FR : La cadeau parfait à offrir à votre moitié !  
  EN : The perfect gift to offer to your loved one !
 
-## Comment le compiler ? / How to compile it ?
+## Comment l'assembler ? / How to assemble it ?
 FR : Remplissez la chaîne de caractère en majuscules dans le fichier src/graphics/text/text.asm  
 Puis tapez ```make``` dans un terminal (Vous devez avoir installé [RGBDS](https://github.com/gbdev/rgbds) en premier)
 
