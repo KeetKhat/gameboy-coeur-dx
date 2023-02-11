@@ -104,6 +104,14 @@ load_map:
 	jp nz, load_map ; Si elle n'est pas terminée, on retourne à load_map
 	ret ; Si c'est fait on peut quitter la routine
 
+check_vram_free:
+	push hl
+	ld hl, $FF41
+	.loop
+	bit 1, [hl]
+	jr nz, .loop
+	pop hl
+	ret
 
 ; ----- Gestion des palettes GBC -----
 

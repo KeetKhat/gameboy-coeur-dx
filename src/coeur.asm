@@ -17,12 +17,6 @@ coeur:
 	ldh [$4B], a ; WX
 
 
-	; DMG Palette
-
-	ld a, %11100100 ; PAL
-	ldh [$47], a
-
-
 	; CGB Palette
 
 	ld b, 8
@@ -69,6 +63,32 @@ coeur:
 	ld hl, coeur_map
 	call load_map
 
+	ld a, %11110001
+	ldh [$40], a ; LCD Location
+
+	; DMG Palette
+
+	ld a, $00 ; White
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, $54 ; Light gray
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, $A8 ; Dark gray
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, $FC ; Black
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, %11100100 ; Default PAL
+	ldh [$47], a
+
+	ld bc, 60
+	call delay_frames
 
 	; Copie prénom sur la map
 
@@ -76,44 +96,53 @@ coeur:
 	ld de, texte.prenom
 	call display_text
 
-	ld a, %11110001
-	ldh [$40], a ; LCD Location
-
 loop_coeur:
+	ld a, [bouncing]
+.loop_coeur_b
+	push af
 	ldh a, [$42]
 	inc a
 	ldh [$42], a
-	ld bc, 15
-	call delay_frames
-
-	ldh a, [$42]
-	inc a
-	ldh [$42], a
-	ld bc, 15
+	ld bc, 2
 	call delay_frames
 
 	ldh a, [$42]
 	inc a
 	ldh [$42], a
-	ld bc, 15
+	ld bc, 2
 	call delay_frames
 
+	ldh a, [$42]
+	inc a
+	ldh [$42], a
+	ld bc, 2
+	call delay_frames
+
+
+	call delay_frame
 
 	ldh a, [$42]
 	dec a
 	ldh [$42], a
-	ld bc, 15
+	ld bc, 2
 	call delay_frames
 
 	ldh a, [$42]
 	dec a
 	ldh [$42], a
-	ld bc, 15
+	ld bc, 2
 	call delay_frames
 
 	ldh a, [$42]
 	dec a
 	ldh [$42], a
-	ld bc, 15
+	ld bc, 2
+	call delay_frames
+
+	pop af
+	dec a
+	jr nz, .loop_coeur_b
+	ld bc, 30
 	call delay_frames
 	jr loop_coeur
+	ret

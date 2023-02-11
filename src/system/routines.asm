@@ -15,6 +15,7 @@ clear_mem:
 ; DE = Adresse de destination
 ; HL = Adresse qui pointe vers les octets à copier
 copy_mem:
+	call check_vram_free
 	ld a, [hli] ; On met le premier octet dans A et on incrémente HL
 	ld [de], a ; On copie A dans l'adresse de destination
 	inc de ; On incrémente l'adresse de destination
@@ -27,6 +28,7 @@ copy_mem:
 ; HL = Adresse de destination de la map
 ; DE = Label vers la chaîne de caractère
 display_text:
+	call check_vram_free
 	ld a, [de]
 	ld [hli], a
 	inc de

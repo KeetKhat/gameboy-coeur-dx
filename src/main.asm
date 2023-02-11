@@ -6,13 +6,33 @@ INCLUDE "system/wram.asm" ; WRAM Variables
 
 INCLUDE "graphics/fonts.asm" ; Gestion du texte
 
-Section "Coeur", ROM0[$150]
+SECTION "Coeur", ROM0[$150]
 main:
 
 	ld a, %00000001
 	ldh [$FF], a ; V-Blank INT
 	ei
 
+	; ---------------------------
+	; -							-
+	; -			DMG FADE		-
+	; -							-
+	; ---------------------------
+
+	ld a, $FC ; Black
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, $A8 ; Dark gray
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, $54 ; Light gray
+	ldh [$47], a
+	call delay_frame
+	call delay_frame
+	ld a, $00 ; White
+	ldh [$47], a
 
 	; ---------------------------
 	; -							-
@@ -33,6 +53,10 @@ main:
 	ld de, 8*15
 	ld hl, $FF80 ; HRAM Location
 	call clear_mem
+
+	; Number of time to bounce in a single loop
+	ld a, 2
+	ld [bouncing], a
 
 	; ---------------------------
 	; -							-
